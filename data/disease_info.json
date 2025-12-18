@@ -1,0 +1,52 @@
+{
+  "bacterial_leaf_blight": {
+    "symptoms": "Water-soaked lesions on leaf tips and margins, turning yellow to white. Leaves may have a wavy margin. Bacterial ooze visible in early morning.",
+    "treatment": "Apply copper-based bactericides like Copper Oxychloride (3g/L). Use antibiotics like Streptocycline (100 ppm) or Plantomycin. Remove and destroy infected plant parts. Ensure proper drainage.",
+    "prevention": "Use resistant varieties like Improved Samba Mahsuri. Apply balanced fertilizers, avoid excessive nitrogen. Maintain proper water management. Use certified disease-free seeds. Practice crop rotation."
+  },
+  "bacterial_leaf_streak": {
+    "symptoms": "Narrow, dark green to brown streaks between leaf veins. Streaks may merge causing leaf to dry. Yellow to orange bacterial ooze appears on lesions.",
+    "treatment": "Spray Copper Oxychloride 50% WP (3g/L) or Streptocycline (100 ppm). Remove infected leaves. Improve field sanitation and drainage.",
+    "prevention": "Plant resistant cultivars. Avoid mechanical injury to plants. Control insect vectors. Use balanced fertilization. Avoid waterlogging conditions."
+  },
+  "bacterial_panicle_blight": {
+    "symptoms": "Brown to dark brown discoloration on panicle branches. Grains become brown and chaffy. White bacterial ooze on infected panicles during humid conditions.",
+    "treatment": "Apply Copper Hydroxide or Copper Oxychloride (3g/L) at flowering stage. Use Streptocycline (500 ppm) spray. Remove infected panicles and destroy.",
+    "prevention": "Use disease-free seeds. Apply potassium fertilizers adequately. Avoid excessive nitrogen during reproductive stage. Ensure proper field drainage. Plant at optimal spacing."
+  },
+  "blast": {
+    "symptoms": "Diamond-shaped lesions with gray centers and brown margins on leaves. Neck blast causes panicle to break. Collar blast causes stem rot. Fungal spores visible as gray mold.",
+    "treatment": "Apply Tricyclazole 75% WP (0.6g/L) or Isoprothiolane 40% EC (1.5ml/L). Use Carbendazim 50% WP (1g/L). Spray at tillering, booting, and flowering stages. Apply silicon amendments.",
+    "prevention": "Use resistant varieties like Improved Pusa Basmati. Avoid excessive nitrogen fertilization. Maintain optimal water levels (alternate wetting and drying). Practice clean cultivation. Use certified seeds treated with Carbendazim."
+  },
+  "brown_spot": {
+    "symptoms": "Circular or oval brown spots with gray center on leaves. Spots have yellow halo. Severe infection causes leaf death. Spots also appear on leaf sheaths and grains.",
+    "treatment": "Spray Mancozeb 75% WP (2g/L) or Chlorothalonil 75% WP (2g/L). Apply Propiconazole 25% EC (1ml/L). Repeat sprays at 10-day intervals. Use silicon-based fertilizers.",
+    "prevention": "Use certified disease-free seeds. Apply balanced fertilization with potassium and silicon. Maintain proper water management. Practice crop rotation. Remove crop residues after harvest."
+  },
+  "dead_heart": {
+    "symptoms": "Central shoot (dead heart) dries and turns brown, caused by stem borer. Easy to pull out dead shoot. Leaves show yellowing. In later stages, causes white ear heads (panicle damage).",
+    "treatment": "Apply Chlorantraniliprole 18.5% SC (0.3ml/L) or Cartap Hydrochloride 50% SP (2g/L). Use Fipronil 5% SC (2ml/L). Remove and destroy dead hearts. Release egg parasitoid Trichogramma japonicum.",
+    "prevention": "Remove alternate host weeds. Avoid staggered planting. Use pheromone traps (20/ha). Clip leaf tips before transplanting. Apply neem cake in nursery. Maintain 15cm water level for 3 days after transplanting."
+  },
+  "downy_mildew": {
+    "symptoms": "Yellowish or pale green streaks on leaves parallel to veins. White downy fungal growth on lower leaf surface. Stunted growth and reduced tillering. Leaves may twist and curl.",
+    "treatment": "Apply Metalaxyl 8% + Mancozeb 64% WP (2.5g/L) or Dimethomorph 50% WP (1.5g/L). Use Fosetyl-Al 80% WP (2.5g/L). Spray at early disease appearance and repeat after 10 days.",
+    "prevention": "Use resistant varieties. Ensure proper field drainage. Avoid dense planting. Remove infected plants immediately. Avoid excessive nitrogen. Practice seed treatment with Metalaxyl."
+  },
+  "hispa": {
+    "symptoms": "White linear streaks on leaves due to scraping of green tissues by adults. Leaf mining by grubs causing white patches. Severe damage leads to leaf drying. Young plants most affected.",
+    "treatment": "Apply Chlorpyrifos 20% EC (2.5ml/L) or Quinalphos 25% EC (2ml/L). Use Thiamethoxam 25% WG (0.2g/L) or Fipronil 5% SC (2ml/L). Spray during early morning when adults are active.",
+    "prevention": "Avoid close spacing. Remove weeds that serve as alternate hosts. Use yellow sticky traps. Apply neem oil (3%). Clip leaf tips before transplanting. Drain water from field during severe attack."
+  },
+  "normal": {
+    "symptoms": "Healthy rice plant with no visible disease symptoms. Leaves are green and vigorous. Normal growth and development observed.",
+    "treatment": "No treatment required. Continue good agricultural practices to maintain plant health.",
+    "prevention": "Maintain balanced nutrition (NPK 120:60:40 kg/ha). Practice proper water management (5-7cm during critical stages). Monitor regularly for pests and diseases. Use certified quality seeds. Implement crop rotation and clean cultivation."
+  },
+  "tungro": {
+    "symptoms": "Yellow to orange leaf discoloration starting from leaf tip. Stunted growth and reduced tillering. Leaves may show mottled or striped pattern. Delayed flowering. Transmitted by green leafhopper.",
+    "treatment": "No direct cure available. Remove and destroy infected plants immediately to prevent spread. Control vector (green leafhopper) using Imidacloprid 17.8% SL (0.5ml/L) or Thiamethoxam 25% WG (0.2g/L).",
+    "prevention": "Use tungro-resistant varieties. Control green leafhopper vectors with neem oil. Avoid staggered planting. Remove infected plants and ratoons. Use healthy, certified seeds. Apply light traps to monitor vector population. Practice synchronous planting."
+  }
+}

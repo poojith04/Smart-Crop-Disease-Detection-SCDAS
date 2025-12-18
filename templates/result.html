@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detection Result - SCDAS</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <h1 class="logo">SCDAS</h1>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/chatbot">Chatbot</a></li>
+                <li><a href="/history">History</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container main-content">
+        <div class="result-container">
+            <h1 class="result-title">🔬 Rice Disease Detection Result</h1>
+            
+            <div class="result-grid">
+                <div class="result-image">
+                    <img src="/{{ result.image_path }}" alt="Uploaded rice crop image">
+                </div>
+                
+                <div class="result-info">
+                    <div class="disease-box">
+                        <h2>Detected Disease</h2>
+                        <p class="disease-name">{{ result.disease }}</p>
+                        <p class="confidence">Confidence: <strong>{{ result.confidence }}%</strong></p>
+                    </div>
+                    
+                    <div class="info-box">
+                        <h3>🔍 Symptoms</h3>
+                        <p>{{ result.symptoms }}</p>
+                    </div>
+                    
+                    <div class="info-box">
+                        <h3>🩺 Treatment Recommendation</h3>
+                        <p>{{ result.treatment }}</p>
+                    </div>
+                    
+                    <div class="info-box">
+                        <h3>🛡️ Prevention Measures</h3>
+                        <p>{{ result.prevention }}</p>
+                    </div>
+                    
+                    <div class="info-box">
+                        <h3>📍 Location Information</h3>
+                        <p><strong>Address:</strong> {{ result.location.address }}</p>
+                        <p><strong>Region:</strong> {{ result.location.region }}</p>
+                        <p><strong>Climate Info:</strong> {{ result.location.climate_info }}</p>
+                        <p><strong>Regional Advice:</strong> {{ result.location.crop_advice }}</p>
+                    </div>
+                    
+                    <div class="action-buttons">
+                        <label for="audioLang" style="margin-right:10px;">
+                            Audio Language:
+                            <select id="audioLang">
+                                <option value="en">English</option>
+                                <option value="te">తెలుగు (Telugu)</option>
+                            </select>
+                        </label>
+                        <button class="btn btn-success" id="listenBtn">
+                            🔊 Listen to Advice
+                        </button>
+                        <a href="/" class="btn btn-secondary">
+                            ← Check Another Image
+                        </a>
+                    </div>
+
+                    
+                    <audio id="audioPlayer" controls style="display:none; margin-top: 20px; width: 100%;"></audio>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+        <p>© 2025 SCDAS - Empowering Rice Farmers with Technology</p>
+    </footer>
+
+    <script>
+        document.getElementById('listenBtn').addEventListener('click', function() {
+            const advice = `Disease detected: {{ result.disease }}. Symptoms: {{ result.symptoms }}. Treatment: {{ result.treatment }}. Prevention: {{ result.prevention }}`;
+            
+            this.innerHTML = '⏳ Generating audio...';
+            this.disabled = true;
+            const audioLang = document.getElementById('audioLang').value;
+            
+            fetch('/text-to-speech', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ text: advice, language: audioLang })
+
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.audio_url) {
+                    const audioPlayer = document.getElementById('audioPlayer');
+                    audioPlayer.src = data.audio_url;
+                    audioPlayer.style.display = 'block';
+                    audioPlayer.play();
+                }
+                this.innerHTML = '🔊 Listen to Advice';
+                this.disabled = false;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Error generating audio. Please try again.');
+                this.innerHTML = '🔊 Listen to Advice';
+                this.disabled = false;
+            });
+        });
+    </script>
+</body>
+</html>

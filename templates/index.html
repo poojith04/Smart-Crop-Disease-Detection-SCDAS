@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>SCDAS - Smart Rice Disease Detection</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        .upload-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 30px 0;
+        }
+        
+        .btn-camera, .btn-gallery {
+            flex: 1;
+            min-width: 150px;
+            padding: 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .btn-camera {
+            background-color: #007ff9;
+            color: white;
+        }
+        
+        .btn-camera:hover {
+            background-color: #53b2d7;
+        }
+        
+        .btn-gallery {
+            background-color: #007ff9;
+            color: white;
+        }
+        
+        .btn-gallery:hover {
+            background-color: #53b2d7;
+        }
+        
+        .btn-icon {
+            font-size: 2em;
+        }
+        
+        @media (max-width: 600px) {
+            .upload-buttons {
+                flex-direction: column;
+            }
+            
+            .btn-camera, .btn-gallery {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+    <div class="container">
+        <h1 class="logo">SCDAS</h1>
+        <ul class="nav-links">
+            <li><a href="/" class="active">Home</a></li>
+            <li><a href="/chatbot">Chatbot</a></li>
+            <li><a href="/history">History</a></li>
+            <li><a href="/logout" class="logout-btn">➡️ Logout</a></li>
+        </ul>
+    </div>
+</nav>
+    <div class="hero-section">
+        <div class="container">
+            <h1 class="hero-title">Smart Crop Disease Detection & Advisory System</h1>
+            <p class="hero-subtitle">AI-Powered Solution for Rice Farmers</p>
+        </div>
+    </div>
+
+    <div class="container main-content">
+        <div class="upload-section">
+            <h2>Upload Rice Crop Image</h2>
+            <p>Take a photo or choose from gallery</p>
+            
+            <form action="/predict" method="POST" enctype="multipart/form-data" id="uploadForm">
+                <!-- FIXED: Single file input that we'll modify dynamically -->
+                <input type="file" name="file" id="fileInput" accept="image/*" style="display: none;">
+                
+                <!-- Visible buttons -->
+                <div class="upload-buttons">
+                    <button type="button" class="btn-camera" id="cameraBtn">
+                        <span class="btn-icon">📷</span>
+                        <span>Take Photo</span>
+                    </button>
+                    
+                    <button type="button" class="btn-gallery" id="galleryBtn">
+                        <span class="btn-icon">📁</span>
+                        <span>Choose from Gallery</span>
+                    </button>
+                </div>
+                
+                <div class="image-preview" id="imagePreview"></div>
+                
+                <input type="hidden" name="latitude" id="latitude" value="">
+                <input type="hidden" name="longitude" id="longitude" value="">
+                
+                <button type="submit" class="btn btn-primary" id="submitBtn" disabled>
+                    🔍 Detect Rice Disease
+                </button>
+            </form>
+            
+            <div class="location-status" id="locationStatus">
+                <p>📍 Trying to get your location...</p>
+            </div>
+        </div>
+
+        <div class="features-section">
+            <h2>System Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <span class="feature-icon">🤖</span>
+                    <h3>AI Detection</h3>
+                    <p>Advanced machine learning trained on 10 rice disease classes</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">📍</span>
+                    <h3>GPS Location</h3>
+                    <p>Region-specific rice cultivation advice based on your location</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">🔊</span>
+                    <h3>Voice Advisory</h3>
+                    <p>Listen to treatment suggestions in your preferred language</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">💬</span>
+                    <h3>Smart Chatbot</h3>
+                    <p>Get instant answers to rice cultivation questions</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="disease-info-section">
+            <h2>Rice Diseases Detected by SCDAS</h2>
+            <div class="disease-list">
+                <div class="disease-item">
+                    <span class="disease-icon">🦠</span>
+                    <div class="disease-details">
+                        <h4>Bacterial Diseases</h4>
+                        <p>Bacterial Leaf Blight, Bacterial Leaf Streak, Bacterial Panicle Blight</p>
+                    </div>
+                </div>
+                <div class="disease-item">
+                    <span class="disease-icon">🍄</span>
+                    <div class="disease-details">
+                        <h4>Fungal Diseases</h4>
+                        <p>Blast, Brown Spot, Downy Mildew</p>
+                    </div>
+                </div>
+                <div class="disease-item">
+                    <span class="disease-icon">🐛</span>
+                    <div class="disease-details">
+                        <h4>Pest Damage</h4>
+                        <p>Dead Heart (Stem Borer), Hispa (Leaf Beetle)</p>
+                    </div>
+                </div>
+                <div class="disease-item">
+                    <span class="disease-icon">🦠</span>
+                    <div class="disease-details">
+                        <h4>Viral Disease</h4>
+                        <p>Tungro (Rice Tungro Virus)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>© 2025 SCDAS - Empowering Rice Farmers with Technology</p>
+    </footer>
+
+    <script>
+        const cameraBtn = document.getElementById('cameraBtn');
+        const galleryBtn = document.getElementById('galleryBtn');
+        const fileInput = document.getElementById('fileInput');
+        const submitBtn = document.getElementById('submitBtn');
+        const imagePreview = document.getElementById('imagePreview');
+        const locationStatus = document.getElementById('locationStatus');
+        cameraBtn.addEventListener('click', function() {
+            fileInput.setAttribute('capture', 'environment');
+            fileInput.click();
+        });
+        galleryBtn.addEventListener('click', function() {
+            fileInput.removeAttribute('capture');
+            fileInput.click();
+        });
+        fileInput.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                console.log('File selected:', file.name);
+                submitBtn.disabled = false;
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    imagePreview.innerHTML = `
+                        <div style="text-align: center; margin: 20px 0;">
+                            <p style="color: green; font-weight: bold; margin-bottom: 10px;">✓ Image Selected Successfully</p>
+                            <img src="${event.target.result}" alt="Preview" style="max-width: 100%; max-height: 400px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
+                            <p style="margin-top: 10px; color: #666; font-size: 14px;">${file.name}</p>
+                            <p style="color: #999; font-size: 12px;">Size: ${(file.size / 1024).toFixed(2)} KB</p>
+                        </div>
+                    `;
+                };
+                reader.readAsDataURL(file);
+                cameraBtn.style.opacity = '0.6';
+                galleryBtn.style.opacity = '0.6';
+                cameraBtn.innerHTML = '<span class="btn-icon">✓</span><span>Photo Ready</span>';
+                galleryBtn.innerHTML = '<span class="btn-icon">✓</span><span>Image Ready</span>';
+            }
+        });
+
+        if (navigator.geolocation) {
+            const locationTimeout = setTimeout(function() {
+                locationStatus.innerHTML = '<p style="color: orange;">⚠️ Location timeout. Continuing without location data.</p>';
+            }, 5000);
+            
+            navigator.geolocation.getCurrentPosition(
+                function(position) {
+                    clearTimeout(locationTimeout);
+                    document.getElementById('latitude').value = position.coords.latitude;
+                    document.getElementById('longitude').value = position.coords.longitude;
+                    locationStatus.innerHTML = '<p style="color: green;"> Location detected: ' + 
+                        position.coords.latitude.toFixed(4) + ', ' + 
+                        position.coords.longitude.toFixed(4) + '</p>';
+                },
+                function(error) {
+                    clearTimeout(locationTimeout);
+                    locationStatus.innerHTML = '<p style="color: orange;">⚠️ Location access denied. Continuing without location-based advice.</p>';
+                },
+                {
+                    enableHighAccuracy: false,
+                    timeout: 5000,
+                    maximumAge: 0
+                }
+            );
+        } else {
+            locationStatus.innerHTML = '<p style="color: red;">❌ Geolocation not supported.</p>';
+        }
+
+        document.getElementById('uploadForm').addEventListener('submit', function(e) {
+            const file = fileInput.files[0];
+            
+            if (!file) {
+                e.preventDefault();
+                alert('⚠️ Please select an image first!');
+                return false;
+            }
+            
+            console.log('Submitting file:', file.name, 'Size:', file.size);
+            submitBtn.innerHTML = '⏳ Analyzing rice disease...';
+            submitBtn.disabled = true;
+        });
+    </script>
+</body>
+</html>

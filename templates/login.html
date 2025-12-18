@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - SCDAS</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container" style="max-width: 450px; margin-top: 100px;">
+        <div class="upload-section">
+            <h1 style="text-align: center; color: #2d5016; margin-bottom: 10px;">SCDAS</h1>
+            <p style="text-align: center; color: #6c757d; margin-bottom: 30px;">Enter your details to continue</p>
+            
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            
+            <form method="POST" action="">
+                <div style="margin-bottom: 20px;">
+                    <label for="phone" style="display: block; margin-bottom: 8px; font-weight: bold; font-size: 18px;">Phone Number:</label>
+                    <input type="tel" id="phone" name="phone" required pattern="[0-9]{10}" maxlength="10" placeholder="10-digit mobile number" style="width: 100%; padding: 8px; border: 2px solid #ddd; border-radius: 8px; font-size: 15px;">
+                    <small style="color: #6c757d;">Example: 9876543210</small>
+                </div>
+                
+                <div style="margin-bottom: 25px;">
+                    <label for="pin" style="display: block; margin-bottom: 8px; font-weight: bold; font-size: 18px;">4-Digit PIN:</label>
+                    <input type="password" id="pin" name="pin" required pattern="[0-9]{4}" maxlength="4" placeholder="4-digit PIN" style="width: 100%; padding: 8px; border: 2px solid #ddd; border-radius: 8px; font-size: 15px;">
+                </div>
+                
+                <button type="submit" class="btn btn-primary" style="width: 100%; background-color: #4a7c25; padding: 15px; font-size: 18px;">
+                     Login
+                </button>
+            </form>
+            
+            <p style="text-align: center; margin-top: 25px; font-size: 16px;">
+                New user? <a href="/register" style="color: #4a7c25; font-weight: bold; font-size: 18px;">Register here</a>
+            </p>
+        </div>
+    </div>
+</body>
+</html>

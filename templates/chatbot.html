@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot - SCDAS</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+    <div class="container">
+        <h1 class="logo">SCDAS</h1>
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/chatbot" class="active">Chatbot</a></li>
+            <li><a href="/history">History</a></li>
+            <li><a href="/logout" class="logout-btn">➡️ Logout</a></li>
+        </ul>
+    </div>
+</nav>
+
+
+    <div class="container main-content">
+        <div class="chatbot-container">
+            <h1> Rice Agricultural Advisory Chatbot</h1>
+            <p class="chatbot-subtitle">Ask me anything about rice farming, diseases, and cultivation!</p>
+            
+            <div class="chat-box" id="chatBox">
+                <div class="message bot-message">
+                    <p>Namaste! I'm your rice agricultural assistant. How can I help you today?</p>
+                </div>
+            </div>
+            
+            <div class="chat-input-container">
+                <input type="text" id="userInput" placeholder="Type your question here..." autocomplete="off">
+                <button id="sendBtn" class="btn btn-primary">Send</button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>© 2025 SCDAS - Empowering Rice Farmers with Technology</p>
+    </footer>
+
+    <script>
+        const chatBox = document.getElementById('chatBox');
+        const userInput = document.getElementById('userInput');
+        const sendBtn = document.getElementById('sendBtn');
+
+        function addMessage(message, isUser) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${isUser ? 'user-message' : 'bot-message'}`;
+            messageDiv.innerHTML = `<p>${message}</p>`;
+            chatBox.appendChild(messageDiv);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        function sendMessage() {
+            const message = userInput.value.trim();
+            if (message === '') return;
+
+            addMessage(message, true);
+            userInput.value = '';
+
+            fetch('/chatbot', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ message: message })
+            })
+            .then(response => response.json())
+            .then(data => {
+                addMessage(data.response, false);
+            })
+            .catch(error => {
+                addMessage('Sorry, I encountered an error. Please try again.', false);
+                console.error('Error:', error);
+            });
+        }
+
+        sendBtn.addEventListener('click', sendMessage);
+        userInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+    </script>
+</body>
+</html>

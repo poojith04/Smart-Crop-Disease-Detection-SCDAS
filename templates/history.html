@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagnosis History - SCDAS</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+    <div class="container">
+        <h1 class="logo">SCDAS</h1>
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/chatbot">Chatbot</a></li>
+            <li><a href="/history" class="active">History</a></li>
+            <li><a href="/logout" class="logout-btn">➡️ Logout</a></li>
+        </ul>
+    </div>
+</nav>
+
+
+    <div class="container main-content">
+        <div class="history-container">
+            <div class="history-header">
+                <h1>📋 Diagnosis History</h1>
+                {% if history %}
+                <a href="/clear-history" class="btn btn-danger">Clear History</a>
+                {% endif %}
+            </div>
+
+            {% if history %}
+                <div class="history-grid">
+                    {% for item in history %}
+                    <div class="history-card">
+                        <div class="history-image">
+                            <img src="{{ url_for('static', filename=item.image_path.split('static/')[1]) }}" alt="Rice crop image">
+                        </div>
+                        <div class="history-info">
+                            <h3>{{ item.disease }}</h3>
+                            <p class="timestamp">📅 {{ item.timestamp }}</p>
+                            <p><strong>Confidence:</strong> {{ item.confidence }}%</p>
+                            <p><strong>Location:</strong> {{ item.location.region }}</p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="empty-history">
+                    <p> No diagnosis history yet. Start by uploading a rice plant image!</p>
+                    <a href="/" class="btn btn-primary">Upload Image</a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>© 2025 SCDAS - Empowering Rice Farmers with Technology</p>
+    </footer>
+</body>
+</html>
